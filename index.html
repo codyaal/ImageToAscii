@@ -1,34 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image to Ascii</title>
-    <style>
-        body{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        #drawingBoard{
-            background-color: black;
-        }
-        #submit{
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css" />
     <script src="ImageToAscii.js" defer></script>
-</head>
-<body>
-    <canvas id="drawingBoard" width="800" height="800">
-    </canvas>
-    <input id="imageInput" type="file" accept="image/*">
-    <button id="submit">submit</button>
-
-</body>
+  </head>
+  <body>
+    <header><h1>IMAGE TO ASCII</h1></header>
+    <div id="app">
+      <div id="sideBar">
+        <div id="previewImg"></div>
+        <label for="imageInput" class="buttonStyle"> upload </label>
+        <input id="imageInput" type="file" accept="image/*" hidden />
+        <label for="submit" class="buttonStyle"> submit </label>
+        <input id="submit" type="submit" hidden />
+      </div>
+      <div id="workSpace">
+        <div id="drawingBoard"></div>
+      </div>
+    </div>
+  </body>
 </html>
