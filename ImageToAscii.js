@@ -1,51 +1,82 @@
 // ASCII shades for black background : t P F O Q B A N W M
-// ASCII shades for white background : % a t = ! ~ - : . `
-// 4 shades with only dots and space : ` . : ;
+// ASCII shades for white background : % a t = ! ~ - : . space
+// 4 shades with only dots and special characters : space . : ;
 
-const ASCIIDOTS = ["`", ".", ":", ";"];
+const ASCIIDOTS = [" ", ".", ":", ";"];
 const ASCIIBLACKBG = ["t", "P", "F", "O", "Q", "B", "A", "N", "W", "M"];
-const ASCIIWHITEBG = ["%", "a", "t", "=", "!", "~", "-", ":", ".", "`"];
+const ASCIIWHITEBG = ["%", "a", "t", "=", "!", "~", "-", ":", ".", " "];
 const RESOLUTION = 200;
-
-let inputChanged = false;
 
 const drawingBoard = document.getElementById("drawingBoard");
 const submit = document.getElementById("submit");
 const imageInput = document.getElementById("imageInput");
 const imagePreview = document.getElementById("previewImg");
+const fontColorPicker = document.getElementById("fontColorPicker");
+const backGroundColorPicker = document.getElementById("backGroundColorPicker");
+const resolutionRange = document.getElementById("resolutionRange");
+const asciiShadesInput = document.getElementById("asciiShadesInput");
+
+let image;
+let asciiShades = [" ", ".", ":", ";"];
 
 imageInput.onchange = () => {
-  inputChanged = true;
-  imagePreview.style.backgroundImage =
-    "url('" + window.URL.createObjectURL(imageInput.files[0]) + "')";
+  let img = imageInput.files[0];
+  let imgBlob = new Blob([img], { type: "image/jpeg" });
+  let url = window.URL.createObjectURL(imgBlob);
+
+  image = document.createElement("img");
+  image.src = url;
+  imagePreview.style.backgroundImage = `url("${url}")`;
+
+  image.onload = () => {
+    drawAsciiOnParagraph(
+      getAsciiArray(image, asciiShades, parseInt(resolutionRange.value)),
+      parseInt(resolutionRange.value)
+    );
+  };
 };
 
-submit.onclick = () => {
-  if (inputChanged) {
-    let img = imageInput.files[0];
-    let imgBlob = new Blob([img], { type: "image/jpeg" });
-    let url = window.URL.createObjectURL(imgBlob);
+fontColorPicker.onchange = () => {
+  drawingBoard.style.color = fontColorPicker.value;
+  document.getElementsByClassName("colorPicker")[0].style.backgroundColor =
+    fontColorPicker.value;
+};
 
-    let image = document.createElement("img");
-    image.src = url;
+backGroundColorPicker.onchange = () => {
+  drawingBoard.style.backgroundColor = backGroundColorPicker.value;
+  document.getElementsByClassName("colorPicker")[1].style.backgroundColor =
+    backGroundColorPicker.value;
+};
 
-    image.onload = () => {
-      drawAsciiOnParagraph(getAsciiArray(image, ASCIIWHITEBG));
-    };
-    inputChanged = false;
+resolutionRange.onchange = () => {
+  if (drawingBoard.innerHTML != "") {
+    drawAsciiOnParagraph(
+      getAsciiArray(image, asciiShades, parseInt(resolutionRange.value)),
+      parseInt(resolutionRange.value)
+    );
   }
 };
 
-function getAsciiArray(image, asciiShades) {
+asciiShadesInput.onchange = () => {
+  let input = asciiShadesInput.value;
+  if (input.length < 2) return;
+  asciiShades = input.split("");
+  drawAsciiOnParagraph(
+    getAsciiArray(image, asciiShades, parseInt(resolutionRange.value)),
+    parseInt(resolutionRange.value)
+  );
+};
+
+function getAsciiArray(image, asciiShades, resolution) {
   const canvas = document.createElement("canvas");
   const context = canvas.getContext("2d");
   canvas.style.position = "fixed";
   canvas.style.top = 0;
   canvas.style.left = 0;
-  canvas.width = RESOLUTION;
-  canvas.height = RESOLUTION;
-  context.drawImage(image, 0, 0, RESOLUTION, RESOLUTION);
-  let imageData = context.getImageData(0, 0, RESOLUTION, RESOLUTION);
+  canvas.width = resolution;
+  canvas.height = resolution;
+  context.drawImage(image, 0, 0, resolution, resolution);
+  let imageData = context.getImageData(0, 0, resolution, resolution);
   let rgbaData = Array.from(imageData.data);
   let grayScale = [];
   let asciiArray = [];
@@ -71,15 +102,15 @@ function getAsciiArray(image, asciiShades) {
 }
 
 //draw the ASCII characters as text on an html element
-function drawAsciiOnParagraph(asciiArray) {
+function drawAsciiOnParagraph(asciiArray, resolution) {
   drawingBoard.innerHTML = "";
   drawingBoard.style.fontFamily = "monospace";
   drawingBoard.style.lineHeight = 0.75;
 
-  for (let i = 0; i < RESOLUTION; i++) {
+  for (let i = 0; i < resolution; i++) {
     drawingBoard.append(
       document.createTextNode(
-        asciiArray.slice(i * RESOLUTION, i * RESOLUTION + RESOLUTION).join("")
+        asciiArray.slice(i * resolution, i * resolution + resolution).join("")
       )
     );
     drawingBoard.append(document.createElement("br"));
