@@ -2,18 +2,22 @@
   --dark-primary-color: #353535;
   --dark-accent-color: #00ffab;
   --dark-back-ground-color: #202020;
+  --dark-side-bar-color: #2b2b2b;
   --dark-border-color: #404040;
   --dark-font-color: #bebebe;
   --light-primary-color: #ffffff;
-  --light-accent-color: #00ffab;
-  --light-back-ground-color: #d0d8d0;
-  --light-border-color: #f0f0f0;
+  --light-accent-color: #04d08d;
+  --light-back-ground-color: #d2d2d2;
+  --light-side-bar-color: #f0f0f0;
+  --light-border-color: #eee;
   --light-font-color: #000000;
   --primary-color: var(--dark-primary-color);
   --accent-color: var(--dark-accent-color);
   --back-ground-color: var(--dark-back-ground-color);
+  --side-bar-color: var(--dark-side-bar-color);
   --border-color: var(--dark-border-color);
   --font-color: var(--dark-font-color);
+  --font-size: 2vh;
 }
 
 body {
@@ -31,7 +35,7 @@ header {
   height: 10vh;
   border-bottom: 0.1vh solid var(--border-color);
   text-align: center;
-  font-size: 2vh;
+  font-size: var(--font-size);
   font-family: sans-serif;
   color: var(--accent-color);
   background-color: var(--primary-color);
@@ -68,7 +72,7 @@ header {
   align-items: center;
   width: 15%;
   height: 100%;
-  background-color: #2b2b2b;
+  background-color: var(--side-bar-color);
 }
 
 .toolTitleBar {
@@ -79,7 +83,7 @@ header {
   padding-left: 1vh;
   color: var(--font-color);
   font-family: sans-serif;
-  font-size: 2vh;
+  font-size: var(--font-size);
   border-top: 0.1vh solid var(--border-color);
   border-bottom: 0.1vh solid var(--border-color);
   background-color: var(--primary-color);
@@ -104,7 +108,7 @@ header {
   margin: 2vh 0vh;
   border-radius: 0.5vh;
   font-family: sans-serif;
-  font-size: 2vh;
+  font-size: var(--font-size);
   text-align: center;
   cursor: pointer;
   background-color: var(--accent-color);
@@ -183,7 +187,7 @@ header {
   width: 10vw;
   height: 2.5vh;
   margin: 2vh 0vh;
-  font-size: 2vh;
+  font-size: var(--font-size);
   color: var(--font-color);
   border: 0.1vh solid var(--border-color);
   border-radius: 0.5vh;
