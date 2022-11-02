@@ -8,6 +8,7 @@ const ASCIIWHITEBG = ["%", "a", "t", "=", "!", "~", "-", ":", ".", " "];
 const RESOLUTION = 200;
 
 const drawingBoard = document.getElementById("drawingBoard");
+const themeToggle = document.getElementById("theme-switcher");
 const submit = document.getElementById("submit");
 const imageInput = document.getElementById("imageInput");
 const imagePreview = document.getElementById("previewImg");
@@ -18,6 +19,11 @@ const asciiShadesInput = document.getElementById("asciiShadesInput");
 
 let image;
 let asciiShades = [" ", ".", ":", ";"];
+
+themeToggle.onclick = () => {
+  const root = document.querySelector(":root");
+  root.toggleAttribute("light");
+};
 
 imageInput.onchange = () => {
   let img = imageInput.files[0];
