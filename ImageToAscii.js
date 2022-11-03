@@ -22,7 +22,11 @@ let asciiShades = [" ", ".", ":", ";"];
 
 themeToggle.onclick = () => {
   const root = document.querySelector(":root");
+  const themeSwitcher = document.querySelector(".theme-switcher-label");
   root.toggleAttribute("light");
+  themeSwitcher
+    .querySelectorAll(".icon")
+    .forEach((icon) => icon.classList.toggle("collapse"));
 };
 
 imageInput.onchange = () => {
