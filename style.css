@@ -76,11 +76,20 @@ header {
   right: 2vh;
   width: var(--icon-size);
   height: var(--icon-size);
-  color: var(--accent-color);
-  border-radius: 50%;
   cursor: pointer;
 }
 .theme-switcher-label:hover {
+  opacity: 0.7;
+}
+
+.side-bar-toggle-label {
+  position: absolute;
+  left: 2vh;
+  width: var(--icon-size);
+  height: var(--icon-size);
+  cursor: pointer;
+}
+.side-bar-toggle-label:hover {
   opacity: 0.7;
 }
 
@@ -99,6 +108,9 @@ header {
   overflow: auto;
   background-color: var(--back-ground-color);
 }
+#workSpace[fullScreen] {
+  width: 100%;
+}
 
 #drawingBoard {
   margin: auto;
@@ -116,6 +128,9 @@ header {
   width: 15%;
   height: 100%;
   background-color: var(--side-bar-color);
+}
+#sideBar[collapse] {
+  visibility: collapse;
 }
 
 .toolTitleBar {
