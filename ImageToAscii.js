@@ -2,6 +2,7 @@
 
 const drawingBoard = document.getElementById("drawingBoard");
 const themeToggle = document.getElementById("theme-switcher");
+const sideBarToggle = document.getElementById("side-bar-toggle");
 const submit = document.getElementById("submit");
 const imageInput = document.getElementById("imageInput");
 const imagePreview = document.getElementById("previewImg");
@@ -17,11 +18,23 @@ let asciiShades = [" ", ".", ":", ";"];
 
 themeToggle.onclick = () => {
   const root = document.querySelector(":root");
-  const themeSwitcher = document.querySelector(".theme-switcher-label");
+  const themeSwitcherLabel = document.querySelector(".theme-switcher-label");
 
   root.toggleAttribute("light");
 
-  themeSwitcher
+  themeSwitcherLabel
+    .querySelectorAll(".icon")
+    .forEach((icon) => icon.classList.toggle("collapse"));
+};
+
+sideBarToggle.onclick = () => {
+  const sideBarToggleLabel = document.querySelector(".side-bar-toggle-label");
+  const sideBar = document.getElementById("sideBar");
+  const workSpace = document.getElementById("workSpace");
+
+  sideBar.toggleAttribute("collapse");
+  workSpace.toggleAttribute("fullScreen");
+  sideBarToggleLabel
     .querySelectorAll(".icon")
     .forEach((icon) => icon.classList.toggle("collapse"));
 };
