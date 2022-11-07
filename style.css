@@ -131,6 +131,7 @@ header {
 }
 #sideBar[collapse] {
   visibility: collapse;
+  width: 0;
 }
 
 .toolTitleBar {
