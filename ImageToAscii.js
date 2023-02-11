@@ -133,7 +133,7 @@ function getAsciiArray(image, asciiShades, width, height) {
 
   //calculating the corresponding ASCII characters from grayscale values
   for (let i = 0; i < grayScale.length; i++) {
-    let shades = 255 / asciiShades.length;
+    let shades = 256 / asciiShades.length;
 
     asciiArray.push(asciiShades[Math.floor(grayScale[i] / shades)]);
   }
